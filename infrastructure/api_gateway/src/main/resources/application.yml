@@ -1,0 +1,55 @@
+server:
+  port: 9110 # 服务端口
+
+spring:
+  profiles:
+    active: dev # 环境设置
+  application:
+    name: infrastructure-apigateway # 服务名
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos服务地址
+    ## GateWay配置
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes: #多个路由
+        - id: service-edu #唯一标识 ,id不重复即可
+          #另外两种配置uri的方式为 (websocket)ws://  (http)http://
+          uri: lb://service-edu  # lb://表示使用的是负载均衡全局过滤器  service-edu为微服务名称 请求转发地址
+          predicates: #使用路径断言
+            - Path=/user/** , /*/edu/**  #满足断言的路径请求都会被网关进行转发  /*表示的是一层目录 /**表示的是一层或者多层目录
+        - id: service-cms
+          uri: lb://service-cms
+          predicates:
+            - Path=/*/cms/**
+        - id: service-oss
+          uri: lb://service-oss
+          predicates:
+            - Path=/*/oss/**
+        - id: service-sms
+          uri: lb://service-sms
+          predicates:
+            - Path=/*/sms/**
+        - id: service-trade
+          uri: lb://service-trade
+          predicates:
+            - Path=/*/trade/**
+        - id: service-ucenter
+          uri: lb://service-ucenter
+          predicates:
+            - Path=/*/ucenter/**
+        - id: service-vod
+          uri: lb://service-vod
+          predicates:
+            - Path=/*/vod/**
+        - id: service-statistics
+          uri: lb://service-statistics
+          predicates:
+            - Path=/*/statistics/**
+        - id: service-acl
+          uri: lb://service-acl
+          predicates:
+            - Path=/*/acl/**

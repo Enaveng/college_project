@@ -1,0 +1,63 @@
+server:
+  port: 8110 # 服务端口
+
+spring:
+  profiles:
+    active: dev # 环境设置
+  application:
+    name: service-edu # 设置的服务注册的微服务名
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848  #微服务注册到Nacos
+  sentinel:
+    transport:
+      dashboard: localhost:8080   #配置Sentinel dashboard地址
+      #默认8719端口，假如被占用会自动从8719开始依次+1扫描，直至找到未被占用的端口
+      port: 8719
+  datasource: # mysql数据库连接
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/college_edu?serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  #spring:
+  jackson: #返回json的全局时间格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #spring:
+  redis:
+    host: 192.168.229.132
+    port: 6379
+    database: 0
+    password: 123456  #默认为空
+    lettuce:
+      pool:
+        max-active: 20  #最大连接数，负值表示没有限制，默认8
+        max-wait: -1    #最大阻塞等待时间，负值表示没限制，默认-1
+        max-idle: 8     #最大空闲连接，默认8
+        min-idle: 0     #最小空闲连接，默认0
+
+#mybatis日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #指定Xml文件的路径
+  mapper-locations: classpath:com/college/service/edu/mapper/xml/*.xml
+# 设置日志级别
+#logging:
+#  level:
+#    root: INFO
+
+#解决长流程调用超时问题
+ribbon:
+  MaxAutoRetries: 0 # 同一实例最大重试次数，不包括首次调用，默认0
+  MaxAutoRetriesNextServer: 1 # 重试其他实例的最大重试次数，不包括首次所选的server，默认1  即为允许切换实例的次数
+  ConnectTimeout: 10000 #连接建立的超时时长，默认1秒
+  ReadTimeout: 10000 #处理请求的超时时间，默认为1秒
+
+
+feign:
+  sentinel:
+    enabled: true # 激活Sentinel对Feign的支持
+
+
