@@ -13,9 +13,9 @@ spring:
 
 aliyun:
   oss:
-    endpoint: oss-cn-beijing.aliyuncs.com
-    keyid: LTAI5tDAJbmAGWqUZhyMKCtP
-    keysecret: tJPxCbF666WNYMKb4zjnvd53Q3MUbA
+    endpoint: XXXX
+    keyid: XXXX
+    keysecret: XXXX
     #bucket可以在控制台创建，也可以使用java代码创建，注意先测试bucket是否已被占用
-    bucketname: avatar-college-file03
+    bucketname: XXXX
 
