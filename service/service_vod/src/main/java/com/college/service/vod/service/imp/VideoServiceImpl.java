@@ -11,6 +11,7 @@ import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
 import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
 import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.college.baseservice.exception.CollegeException;
+import com.college.commonutils.result.R;
 import com.college.commonutils.result.ResultCodeEnum;
 import com.college.service.vod.service.VideoService;
 import com.college.service.vod.util.AliyunVodSDKUtils;
@@ -66,8 +67,8 @@ public class VideoServiceImpl implements VideoService {
 
         /**
          *  使用StringBuffer与StringBuilder类似，都是可变的字符串序列，可以在原始字符串上进行修改。
-         *  如果单纯使用String进行字符串拼接 每次对字符串进行修改时，都会创建一个新的字符串对象。在循环中频繁地进行字符串拼接操作，
-         *  会导致大量的字符串对象创建，这会消耗大量的内存和时间。
+         *  如果单纯使用String进行字符串拼接 每次对字符串进行修改时，底层实际使用的是StringBuild的append()方法，最后再使用toString方法转换为字符串对象。
+         *  在循环中频繁地进行字符串拼接操作，会导致大量的字符串对象创建，这会消耗大量的内存和时间。
          */
         StringBuffer idListStr = new StringBuffer(); //组装好的字符串
         for (int i = 0; i < size; i++) {

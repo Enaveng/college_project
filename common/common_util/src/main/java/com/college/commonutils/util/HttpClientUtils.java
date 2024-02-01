@@ -100,7 +100,7 @@ public class HttpClientUtils {
 			this.url = url.toString();
 		}
 		HttpGet http = new HttpGet(url);
-		execute(http);
+			execute(http);
 	}
 
 	/**

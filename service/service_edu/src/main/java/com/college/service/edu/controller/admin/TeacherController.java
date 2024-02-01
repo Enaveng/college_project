@@ -46,11 +46,9 @@ public class TeacherController {
     public R getAll() {
         List<Teacher> teacherList = teacherService.list();
         return R.ok().data("items", teacherList);
-
     }
 
     //根据id删除讲师信息
-
     /**
      * 注:，@TableLogic注解是逻辑删除，并不会永久删除数据，实体类加上这个注解再执行删除方法的时候会变成修改
      * 使用removeById时会将删除方法变成修改方法  并不会真实删除数据库数据 对应的是字段 isDeleted

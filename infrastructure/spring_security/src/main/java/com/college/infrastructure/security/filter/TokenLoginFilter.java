@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 登录过滤器，继承UsernamePasswordAuthenticationFilter，对用户名密码进行登录校验
